@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Campaign Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1526554850534-7c78330d5f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFpbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow here */
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Campaign Manager</h1>
+        <div class="button-container">
+            <a href="/add_subscribe" class="button">Add Subscriber</a>
+            <a href="/unsubscribe" class="button">Unsubscribe User</a>
+            <a href="/add_campaign" class="button">Add a New Campaign</a>
+            <a href="/send_mail" class="button">Start Campaign</a>
+        </div>
+    </div>
+</body>
+</html>
