@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -127,8 +128,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,"static"),]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ## Adding smtp creds
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_PORT = 587
-EMAIL_HOST_USER =  'postmaster@sandboxafee5e4b51f447f5b8f496e6e3d6c70c.mailgun.org'
-EMAIL_HOST_PASSWORD = 'ffcaf0874719a7a77f5715e23de1f807-7ca144d2-91eae023'
+# EMAIL_HOST = 'smtp.mailgun.org'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER ='postmaster@sandboxe52e02cdf15746728b83daba5914fa4a.mailgun.org'
+# EMAIL_HOST_PASSWORD = 'ed8c2a6cc6d461b6f0ec8d313c9d0969-7ca144d2-e3f5768f'
+
+EMAIL_HOST = os.getenv('SMTP_HOST')
+print("email host: ",EMAIL_HOST)
+EMAIL_PORT = os.getenv('SMTP_PORT')
+EMAIL_HOST_USER = os.getenv('SMTP_USERNAME')
+EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASSWORD')
 EMAIL_USE_TLS = True
