@@ -1,9 +1,8 @@
-# Django Email Campaign Manager
+# Mail-ed It !!
 
 **Description:**
 
-The Django Email Campaign Manager is a web application that allows you to manage email subscribers, create email campaigns, and send out email campaigns to your subscribers. This app uses an SQLite3 database for data storage. <br>
-![image](https://github.com/utkarshk1607/email_campaign_manager/assets/144452025/ec2909c9-233b-4722-9131-75927eda2498)
+Mail-ed it is a web application that allows you to manage email subscribers, create email campaigns, and send out email campaigns to your subscribers. This app uses an SQLite3 database for data storage. <br>
  <br>
 
 **Features:**
@@ -11,7 +10,7 @@ The Django Email Campaign Manager is a web application that allows you to manage
 - Add and remove subscribers from your email list.
 - Create and manage email campaigns.
 - Start and send email campaigns to your subscribers.
-- Track the status and results of your email campaigns.
+
 
 **Installation:**
 
@@ -19,7 +18,7 @@ The Django Email Campaign Manager is a web application that allows you to manage
 `git clone https://github.com/your-username/email-campaign-manager.git` <br>
 
 2. Change into the project directory: <br>
-`cd email-campaign-manager` <br>
+`cd mailedit` <br>
 
 3. Create a virtual environment and activate it: <br>
 `python -m venv venv` <br>
