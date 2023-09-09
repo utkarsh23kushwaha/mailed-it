@@ -47,10 +47,10 @@ def add_subscribe(request):
         email = request.POST.get('email')
         
         try:
-            # Try to find a subscriber with the provided email
+           
             subscriber = Subscriber.objects.get(email=email)
 
-            # Check if the subscriber is inactive; if so, update status to active
+           
             if subscriber.Status == "inactive":
                 subscriber.Status = "active"
                 subscriber.save()
@@ -59,7 +59,7 @@ def add_subscribe(request):
                 messages.error(request, f"Email {email} already exists and is active.")
 
         except Subscriber.DoesNotExist:
-            # If the subscriber doesn't exist, add a new one
+           
             date = datetime.now()
             subs = Subscriber(name=name, email=email, Subscribed_date=date.date(), Status="active", Unsubscribed_date=None)
             subs.save()

@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zrgod^m42%x7+0i+^0$#3%*@5jl*qt-3_j=mcr!!dw&4yebgnc'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,11 +128,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,"static"),]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ## Adding smtp creds
-# EMAIL_HOST = 'smtp.mailgun.org'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER ='postmaster@sandboxe52e02cdf15746728b83daba5914fa4a.mailgun.org'
-# EMAIL_HOST_PASSWORD = 'ed8c2a6cc6d461b6f0ec8d313c9d0969-7ca144d2-e3f5768f'
-
 EMAIL_HOST = os.getenv('SMTP_HOST')
 print("email host: ",EMAIL_HOST)
 EMAIL_PORT = os.getenv('SMTP_PORT')

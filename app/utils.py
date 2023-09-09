@@ -64,11 +64,11 @@ def send_email_with_template(subject, html_content, recipients):
 #             thread.start()
 
 
-        for thread in threads:
-            thread.join()
+    #     for thread in threads:
+    #         thread.join()
 
-        print("All emails sent successfully.")
-        return True
-    except Exception as e:
-        print(f"Email sending failed: {str(e)}")
-        return False
+    #     print("All emails sent successfully.")
+    #     return True
+    # except Exception as e:
+    #     print(f"Email sending failed: {str(e)}")
+    #     return False
