@@ -6,9 +6,10 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from app.utils import send_email_with_template
 from django_user_agents.utils import get_user_agent
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-
-
+def is_admin(user):
+    return user.is_staff
 
 def main(request):
     user_agent = get_user_agent(request)
@@ -18,6 +19,8 @@ def main(request):
         template_name = 'base.html'
     return render (request, template_name)
 
+@login_required  # Ensures the user is logged in
+@user_passes_test(is_admin)  # Ensures the user passes the custom test
 def send_mail(request):
     user_agent = get_user_agent(request)
     if user_agent.is_mobile or user_agent.is_tablet: 
