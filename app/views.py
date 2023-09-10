@@ -5,15 +5,25 @@ from app.models import Campaign
 from django.contrib import messages
 from django.template.loader import render_to_string
 from app.utils import send_email_with_template
+from django_user_agents.utils import get_user_agent
 
 
 
 
 def main(request):
-    return render (request, "base.html")
+    user_agent = get_user_agent(request)
+    if user_agent.is_mobile or user_agent.is_tablet: 
+        template_name = 'mobile.html'
+    else : 
+        template_name = 'base.html'
+    return render (request, template_name)
 
 def send_mail(request):
-    template_path  = 'mail_template.html' 
+    user_agent = get_user_agent(request)
+    if user_agent.is_mobile or user_agent.is_tablet: 
+        template_name = 'mobile.html'
+    else : 
+        template_name = 'send_mail.html'
     if request.method == 'POST':
         subject = request.POST.get('subject')
         cap = Campaign.objects.filter(subject = subject)
@@ -41,12 +51,20 @@ def send_mail(request):
             return HttpResponse("Mail Sending Failed :(")
 
     subjects = Campaign.objects.values_list('subject', flat=True).distinct()
-    return render(request, 'send_mail.html', {'subjects': subjects})
+    return render(request, template_name, {'subjects': subjects})
 
 def success_page(request):
     return render(request, 'success.html')
 
+def mobile(request):
+    return render(request, 'mobile.html')
+
 def add_subscribe(request):
+    user_agent = get_user_agent(request)
+    if user_agent.is_mobile or user_agent.is_tablet: 
+        template_name = 'mobile.html'
+    else : 
+        template_name = 'add_subscribe.html'
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -69,9 +87,14 @@ def add_subscribe(request):
             subs = Subscriber(name=name, email=email, Subscribed_date=date.date(), Status="active", Unsubscribed_date=None)
             subs.save()
             messages.success(request, "Subscriber Added Successfully.")
-    return  render(request, 'add_subscribe.html')
+    return  render(request, template_name)
 
 def unsubscribe(request):
+    user_agent = get_user_agent(request)
+    if user_agent.is_mobile or user_agent.is_tablet: 
+        template_name = 'mobile.html'
+    else : 
+        template_name = 'unsubscribe.html'
     if request.method=='POST':
         email  = request.POST.get('email')
         try:
@@ -87,9 +110,14 @@ def unsubscribe(request):
 
         except Subscriber.DoesNotExist:
             messages.error(request, f"Subscriber with email {email} not found.")
-    return render (request, "unsubscribe.html")
+    return render (request, template_name)
 
 def add_campaign(request):
+    user_agent = get_user_agent(request)
+    if user_agent.is_mobile or user_agent.is_tablet: 
+        template_name = 'mobile.html'
+    else : 
+        template_name = 'add_campaign.html'
     if request.method=='POST':
         subject = request.POST.get('subject')
         preview_text = request.POST.get('preview_text')
@@ -106,4 +134,4 @@ def add_campaign(request):
         cap.save()
 
 
-    return render (request, "add_campaign.html")
+    return render (request, template_name)
