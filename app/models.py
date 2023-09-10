@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Subscriber(models.Model):
     name = models.CharField(max_length=100)
@@ -20,4 +21,13 @@ class Campaign(models.Model):
     
     def __str__(self):
         return self.subject
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+   
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+models.signals.post_save.connect(create_user_profile, sender=User)
 
