@@ -1,4 +1,10 @@
-echo "Build Started"
-python3 -m pip install django
-python3 -m pip install djangorestframework
-python3 -m pip install -U python-dotenv
+echo "Building the project..."
+pip install -r requirements.txt
+pip install -U python-dotenv
+
+echo "Make Migration..."
+python3 manage.py makemigrations --noinput
+python3 manage.py migrate --noinput
+
+echo "Collect Static..."
+python3 manage.py collectstatic --noinput --clear
