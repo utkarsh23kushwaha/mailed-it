@@ -24,5 +24,6 @@ urlpatterns = [
     path("add_subscribe",views.add_subscribe, name='add_subscribe'),
     path("unsubscribe",views.unsubscribe, name='unsubscribe'),
     path("add_campaign",views.add_campaign, name='add_campaign'),
-    path("send_mail",views.send_mail, name='send_mail')
+    path("send_mail",views.send_mail, name='send_mail'),
+    path("success_page",views.success_page, name='success_page')
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from datetime import datetime
 from app.models import Subscriber
 from app.models import Campaign
@@ -36,10 +36,15 @@ def send_mail(request):
         recipients = Subscriber.objects.filter(Status='active').values_list('email', flat=True)
    
         if send_email_with_template(subject, rendered_email, recipients):
-            return HttpResponse("Email sent successfully!")
+            return redirect('success_page')
+        else:
+            return HttpResponse("Mail Sending Failed :(")
 
     subjects = Campaign.objects.values_list('subject', flat=True).distinct()
     return render(request, 'send_mail.html', {'subjects': subjects})
+
+def success_page(request):
+    return render(request, 'success.html')
 
 def add_subscribe(request):
     if request.method == 'POST':
@@ -64,7 +69,7 @@ def add_subscribe(request):
             subs = Subscriber(name=name, email=email, Subscribed_date=date.date(), Status="active", Unsubscribed_date=None)
             subs.save()
             messages.success(request, "Subscriber Added Successfully.")
-    return  render (request, "add_subscribe.html")
+    return  render(request, 'add_subscribe.html')
 
 def unsubscribe(request):
     if request.method=='POST':
