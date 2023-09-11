@@ -17,39 +17,42 @@ def main(request):
     return render (request, template_name)
 
 def send_mail(request):
-    user_agent = get_user_agent(request)
-    if user_agent.is_mobile or user_agent.is_tablet: 
-        template_name = 'mobile.html'
-    else : 
-        template_name = 'send_mail.html'
-    if request.method == 'POST':
-        subject = request.POST.get('subject')
-        cap = Campaign.objects.filter(subject = subject)
-        for campaign in cap:
-            subject = campaign.subject
-            preview_text = campaign.preview_text
-            article_url = campaign.article_url
-            html_content = campaign.html_content
-            plain_text_content = campaign.plain_text_content
-            published_date = campaign.published_date
-        campaign_data = {
-                            'Subject': subject,
-                            'preview_text': preview_text,
-                            'article_url': article_url,
-                            'html_content': html_content,
-                            'plain_text_content': plain_text_content,
-                            'published_date': published_date
-                        }
-        rendered_email = render_to_string('mail_template.html', context = campaign_data)
-        recipients = Subscriber.objects.filter(Status='active').values_list('email', flat=True)
-   
-        if send_email_with_template(subject, rendered_email, recipients):
-            return redirect('success_page')
-        else:
-            return HttpResponse("Mail Sending Failed :(")
+    return render(request, 'send_mail_alt.html')
 
-    subjects = Campaign.objects.values_list('subject', flat=True).distinct()
-    return render(request, template_name, {'subjects': subjects})
+# def send_mail(request):
+#     user_agent = get_user_agent(request)
+#     if user_agent.is_mobile or user_agent.is_tablet: 
+#         template_name = 'mobile.html'
+#     else : 
+#         template_name = 'send_mail.html'
+#     if request.method == 'POST':
+#         subject = request.POST.get('subject')
+#         cap = Campaign.objects.filter(subject = subject)
+#         for campaign in cap:
+#             subject = campaign.subject
+#             preview_text = campaign.preview_text
+#             article_url = campaign.article_url
+#             html_content = campaign.html_content
+#             plain_text_content = campaign.plain_text_content
+#             published_date = campaign.published_date
+#         campaign_data = {
+#                             'Subject': subject,
+#                             'preview_text': preview_text,
+#                             'article_url': article_url,
+#                             'html_content': html_content,
+#                             'plain_text_content': plain_text_content,
+#                             'published_date': published_date
+#                         }
+#         rendered_email = render_to_string('mail_template.html', context = campaign_data)
+#         recipients = Subscriber.objects.filter(Status='active').values_list('email', flat=True)
+   
+#         if send_email_with_template(subject, rendered_email, recipients):
+#             return redirect('success_page')
+#         else:
+#             return HttpResponse("Mail Sending Failed :(")
+
+#     subjects = Campaign.objects.values_list('subject', flat=True).distinct()
+#     return render(request, template_name, {'subjects': subjects})
 
 def success_page(request):
     return render(request, 'success.html')
