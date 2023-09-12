@@ -27,5 +27,5 @@ urlpatterns = [
     path("send_mail",views.send_mail, name='send_mail'),
     path("success_page",views.success_page, name='success_page'),
     path("mobile",views.mobile, name='mobile'),
-    path("google_sheet_support",views.google_sheet_support, name='google_sheet_support')
+    path("import_subscribers",views.import_subscribers, name='import_subscribers')
 ]
