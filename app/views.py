@@ -23,7 +23,7 @@ def main(request):
 def send_mail(request):
     return render(request, 'send_mail_alt.html')
 
-def google_sheet_support(request):
+def import_subscribers(request):
 
     if request.method == 'POST':
         link = request.POST.get('link')
