@@ -154,6 +154,7 @@
     <form action="/google_sheet_support" method="post" id="myForm">
         {% csrf_token %}
             <input type="text" id="name" name="link" placeholder="Paste Sheet Link Here" required>
+            <input type="text" id="sheet_name" name="sheet_name" placeholder="Write the name of the Sheet">
             <button type="submit" id="submitButton">Submit</button>
     </form>
     </div>
