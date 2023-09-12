@@ -18,6 +18,13 @@ def send_email_with_template(subject, html_content, recipients):
         print(f"Email sending failed: {str(e)}")
         return False
 
+def sheet_parser(sheet_link):
+    sheet_link
+    sheet_id=sheet_link.split('/')[-2]
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv"
+    df = pd.read_csv(url)
+    return df
+
 ######################## NEW APPROACH ##############################
 
 # import threading
