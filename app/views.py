@@ -46,7 +46,7 @@ def google_sheet_support(request):
         try :
             for item in columns_list:
                 if any(keyword in item.lower() for keyword in email_var_list):
-                    name = item
+                    email = item
 
         except Exception as e:
              print("#######################ERROR:   ",e)
