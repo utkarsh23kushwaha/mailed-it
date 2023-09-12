@@ -6,8 +6,10 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from app.utils import send_email_with_template
 from app.utils import sheet_parser
+from django_user_agents.utils import get_user_agent
 from django.contrib.auth.decorators import login_required, user_passes_test
 import pandas as pd
+
 
 
 def main(request):
