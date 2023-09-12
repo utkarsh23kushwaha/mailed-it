@@ -19,6 +19,71 @@ def main(request):
 def send_mail(request):
     return render(request, 'send_mail_alt.html')
 
+def google_sheet_support(request):
+
+    if request.method == 'POST':
+        link = request.POST.get('link')
+        print(link)
+        data = sheet_parser(link)
+        email_var_list = ["email","emails","e-mails","e-mail"]
+        columns_list = data.columns.tolist()
+        print(columns_list)
+        
+        name = None
+        try :
+            for item in columns_list:
+                if "name" in item.lower():
+                    name=item
+                    
+        except Exception as e:
+              print("#######################ERROR:   ",e)
+
+        email  = None
+        try :
+            for item in columns_list:
+                if any(keyword in item.lower() for keyword in email_var_list):
+                    name = item
+
+        except Exception as e:
+             print("#######################ERROR:   ",e)
+
+        if email == None  :
+            messages.error(request, "Email column Not found in the list")
+        if name == None  :
+            messages.error(request, "Name column Not found in the list")
+
+            
+        
+        if name is not None and email is not None :
+            name_list = data[name].tolist()
+            email_list = data[email].tolist()
+            subscriber_list = []
+            try :
+
+                if len(name_list) == len(email_list):
+                    for name , email in zip(name_list, email_list):
+                        date = datetime.now()
+                        existing_subscriber = Subscriber.objects.filter(email=email).first()
+                        if existing_subscriber:
+                            continue
+                        else :
+                            subs = Subscriber(name=name, email=email, Subscribed_date=date.date(), Status="active", Unsubscribed_date=None)
+                            subscriber_list.append(subs)
+                
+                else:
+                    messages.error(request, "Error occured, check the data in your sheet")
+            except Exception as e:
+                messages.error(request, "Error occured, check the data in your sheet")
+
+        
+            Subscriber.objects.bulk_create(subscriber_list)
+            messages.success(request, "Subsribers sucessfully imported from Google Sheet")
+            name_list = []
+            email_list = []
+
+    return render(request, 'import_sheets.html')
+
+
 # def send_mail(request):
 #     user_agent = get_user_agent(request)
 #     if user_agent.is_mobile or user_agent.is_tablet: 
