@@ -26,5 +26,6 @@ urlpatterns = [
     path("add_campaign",views.add_campaign, name='add_campaign'),
     path("send_mail",views.send_mail, name='send_mail'),
     path("success_page",views.success_page, name='success_page'),
-    path("mobile",views.mobile, name='mobile')
+    path("mobile",views.mobile, name='mobile'),
+    path("google_sheet_support",views.google_sheet_support, name='google_sheet_support')
 ]
