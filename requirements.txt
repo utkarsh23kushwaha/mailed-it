@@ -4,3 +4,4 @@ psycopg2-binary
 dj-database-url
 flask
 django-user-agents
+pandas
