@@ -1,6 +1,4 @@
 echo "Building the project..."
-python3 -m venv myenv
-source myenv/bin/activate
 pip install -r requirements.txt
 pip install -U python-dotenv
 python3 -m pip install pandas
