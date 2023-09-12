@@ -7,24 +7,75 @@ from django.utils.html import strip_tags
 from django.conf import settings
 import pandas as pd
 
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.conf import settings
+
 def send_email_with_template(subject, html_content, recipients):
     try:
         text_content = strip_tags(html_content)
-        msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, recipients)
+
+        msg = EmailMultiAlternatives(
+            subject,
+            text_content,
+            settings.EMAIL_HOST_USER,
+            bcc=recipients,  # All recipients in BCC
+        )
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+
         return True
-    
+
     except Exception as e:
         print(f"Email sending failed: {str(e)}")
         return False
-
-def sheet_parser(sheet_link):
-    sheet_link
-    sheet_id=sheet_link.split('/')[-2]
-    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv"
+    
+def sheet_parser(sheet_link,sheet_name):
+    if sheet_name == '':
+        sheet_link
+        sheet_id=sheet_link.split('/')[-2]
+        url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv"
+    
+    else :
+        sheet_link
+        sheet_id=sheet_link.split('/')[-2]
+        url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+    
     df = pd.read_csv(url)
     return df
+
+# def send_email_with_template(subject, html_content, recipients):
+#     try:
+#         text_content = strip_tags(html_content)
+
+#         for recipient in recipients:
+#             msg = EmailMultiAlternatives(
+#                 subject,
+#                 text_content,
+#                 settings.EMAIL_HOST_USER,
+#                 [recipient],
+#                 bcc=recipients,
+#             )
+#             msg.attach_alternative(html_content, "text/html")
+#             msg.send()
+
+#         return True
+    
+#     except Exception as e:
+#         print(f"Email sending failed: {str(e)}")
+#         return False
+
+# def send_email_with_template(subject, html_content, recipients):
+#     try:
+#         text_content = strip_tags(html_content)
+#         msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, recipients)
+#         msg.attach_alternative(html_content, "text/html")
+#         msg.send()
+#         return True
+    
+#     except Exception as e:
+#         print(f"Email sending failed: {str(e)}")
+#         return False
 
 ######################## NEW APPROACH ##############################
 
