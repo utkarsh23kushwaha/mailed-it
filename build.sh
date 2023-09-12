@@ -1,5 +1,5 @@
 echo "Building the project..."
-python -m venv myenv
+python3 -m venv myenv
 source myenv/bin/activate
 pip install -r requirements.txt
 pip install -U python-dotenv
