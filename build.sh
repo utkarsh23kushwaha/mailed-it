@@ -1,7 +1,7 @@
 echo "Building the project..."
 pip install -r requirements.txt
 pip install -U python-dotenv
-pip install pandas
+python3 -m pip install pandas
 
 echo "Make Migration..."
 python3 manage.py makemigrations --noinput
