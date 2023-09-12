@@ -5,6 +5,7 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+import pandas as pd
 
 def send_email_with_template(subject, html_content, recipients):
     try:
