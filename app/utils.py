@@ -11,7 +11,14 @@ from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.conf import settings
 
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.conf import settings
+
 def send_email_with_template(subject, html_content, recipients):
+    sent_successfully = []
+    failed_emails = []
+
     try:
         text_content = strip_tags(html_content)
 
@@ -22,13 +29,20 @@ def send_email_with_template(subject, html_content, recipients):
             bcc=recipients,  # All recipients in BCC
         )
         msg.attach_alternative(html_content, "text/html")
+        msg.extra_headers['Disposition-Notification-To'] = 'test.mailedit@gmail.com'
         msg.send()
 
-        return True
+        # If the email was sent without errors, add recipients to 'sent_successfully' list
+        sent_successfully.extend(recipients)
+        print(f"Email sent successfully to {', '.join(recipients)}")
 
     except Exception as e:
-        print(f"Email sending failed: {str(e)}")
-        return False
+        # Handle exceptions and add recipients to 'failed_emails' list
+        failed_emails.extend(recipients)
+        print(f"Email sending failed to {', '.join(recipients)}: {str(e)}")
+
+    return sent_successfully, failed_emails
+
     
 def sheet_parser(sheet_link,sheet_name):
     if sheet_name == '':
@@ -43,6 +57,8 @@ def sheet_parser(sheet_link,sheet_name):
     
     df = pd.read_csv(url)
     return df
+
+
 
 # def send_email_with_template(subject, html_content, recipients):
 #     try:
