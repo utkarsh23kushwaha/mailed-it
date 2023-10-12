@@ -12,34 +12,6 @@ Mail-ed it is a web application that allows you to manage email subscribers, cre
 - Start and send email campaigns to your subscribers.
 
 
-**Installation:**
-
-1. Clone the repository to your local machine: <br>
-`git clone https://github.com/your-username/email-campaign-manager.git` <br>
-
-2. Change into the project directory: <br>
-`cd mailedit` <br>
-
-3. Create a virtual environment and activate it: <br>
-`python -m venv venv` <br>
-`source venv/bin/activate` <br>
-
-4. Install the required packages: <br>
-`pip install -r requirements.txt` <br>
-
-5. Apply database migrations: <br>
-`python3 manage.py makemigrations` <br>
-`python3 manage.py migrate` <br>
-
-6. Create a superuser to access the admin panel: <br>
-`python3 manage.py createsuperuser` <br>
-
-7. Start the development server: <br>
-`python manage.py runserver` <br>
-
-
-8. Access the app at `http://l27.0.0.1:8000/` and the admin panel at `http://127.0.0.1:8000/admin/`.
-
 **Usage:**
 
 1. **Admin Panel:**
